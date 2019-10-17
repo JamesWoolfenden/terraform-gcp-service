@@ -1,14 +1,20 @@
-variable "name" {
+variable name {
   type = string
 }
 
-variable "project" {
+variable project {
   type = string
 }
 
-variable "zone" {
-    type = string
+
+variable members {
+    type=list
 }
 
-
-
+variable service {
+  type = map
+  default = {
+    id           = "examplea"
+    display_name = "terraform"
+  }
+}

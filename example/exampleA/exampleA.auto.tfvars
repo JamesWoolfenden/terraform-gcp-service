@@ -1,11 +1,11 @@
-members=[
-      "james.woolfenden@gmail.com",
-    ]
+members = [
+  "james.woolfenden@gmail.com",
+]
 
-name   = "terraform"
-project= "examplea"
+name    = "terraform"
+project = "examplea"
 
-service= {
-    id           = "terraform"
-    display_name = "terraform service user"
-  }
+service = {
+  id           = "terraform"
+  display_name = "terraform service user"
+}

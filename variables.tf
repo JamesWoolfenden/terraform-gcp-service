@@ -8,9 +8,11 @@ variable project {
 
 
 variable members {
-    type=list
+  description = "List of memebers who can use this role"
+  type        = list
 }
 
 variable service {
-  type = map
+  description = "Name and description of thd service user"
+  type        = map
 }

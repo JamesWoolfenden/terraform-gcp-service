@@ -1,5 +1,5 @@
 module "service" {
-  source             = "../../"
+  source  = "../../"
   members = var.members
   name    = var.name
   project = var.project

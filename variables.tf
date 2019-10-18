@@ -13,8 +13,4 @@ variable members {
 
 variable service {
   type = map
-  default = {
-    id           = "examplea"
-    display_name = "terraform"
-  }
 }

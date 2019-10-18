@@ -9,3 +9,7 @@ variable project {
 variable members {
     type=list
 }
+
+variable service {
+  type=map
+}

@@ -1,15 +1,15 @@
-variable name {
+variable "name" {
   type = string
 }
 
-variable project {
+variable "project" {
   type = string
 }
 
-variable members {
+variable "members" {
   type = list
 }
 
-variable service {
+variable "service" {
   type = map
 }

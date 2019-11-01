@@ -1,14 +1,14 @@
 
-output email {
+output "email" {
   value = google_service_account.service.email
 
 }
 
-output name {
+output "name" {
   value = google_service_account.service.name
 }
 
 
-output unique_id {
+output "unique_id" {
   value = google_service_account.service.unique_id
 }

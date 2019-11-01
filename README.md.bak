@@ -19,24 +19,7 @@ module "service" {
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
-## Inputs
-
-| Name    | Description                              |  Type  | Default | Required |
-| ------- | ---------------------------------------- | :----: | :-----: | :------: |
-| members | List of memebers who can use this role   |  list  |   n/a   |   yes    |
-| name    |                                          | string |   n/a   |   yes    |
-| project |                                          | string |   n/a   |   yes    |
-| service | Name and description of thd service user |  map   |   n/a   |   yes    |
-
-## Outputs
-
-| Name      | Description |
-| --------- | ----------- |
-| email     |             |
-| name      |             |
-| unique_id |             |
-
+I_WANT_TO_BE_REPLACED
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Related Projects

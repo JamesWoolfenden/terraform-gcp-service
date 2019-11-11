@@ -23,7 +23,7 @@ module "service" {
 
 | Name    | Description                              |  Type  | Default | Required |
 | ------- | ---------------------------------------- | :----: | :-----: | :------: |
-| members | List of memebers who can use this role   |  list  |   n/a   |   yes    |
+| members | List of members who can use this role    |  list  |   n/a   |   yes    |
 | name    |                                          | string |   n/a   |   yes    |
 | project |                                          | string |   n/a   |   yes    |
 | service | Name and description of thd service user |  map   |   n/a   |   yes    |

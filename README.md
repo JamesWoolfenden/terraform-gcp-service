@@ -1,6 +1,6 @@
 [![Slalom][logo]](https://slalom.com)
 
-# terraform-gcp-service [![Build Status](https://api.travis-ci.com/JamesWoolfenden/terraform-gcp-service.svg?branch=master)](https://travis-ci.com/JamesWoolfenden/terraform-gcp-service) [![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/terraform-gcp-service.svg)](https://github.com/JamesWoolfenden/terraform-gcp-service/releases/latest)
+# terraform-gcp-service [![Build Status](https://github.com/JamesWoolfenden/terraform-gcp-service/workflows/Verify%20and%20Bump/badge.svg?branch=master)](https://github.com/JamesWoolfenden/terraform-gcp-service) [![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/terraform-gcp-service.svg)](https://github.com/JamesWoolfenden/terraform-gcp-service/releases/latest)
 
 Creates a GCP service user.
 
@@ -58,7 +58,7 @@ Please use the [issue tracker](https://github.com/jameswoolfenden/terraform-aws-
 
 ## Copyrights
 
-Copyright � 2019-2019 [Slalom, LLC](https://slalom.com)
+Copyright © 2019-2019 [Slalom, LLC](https://slalom.com)
 
 ## License
 

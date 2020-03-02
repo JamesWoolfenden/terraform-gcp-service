@@ -1,6 +1,11 @@
 [![Slalom][logo]](https://slalom.com)
 
-# terraform-gcp-service [![Build Status](https://github.com/JamesWoolfenden/terraform-gcp-service/workflows/Verify%20and%20Bump/badge.svg?branch=master)](https://github.com/JamesWoolfenden/terraform-gcp-service) [![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/terraform-gcp-service.svg)](https://github.com/JamesWoolfenden/terraform-gcp-service/releases/latest)
+# terraform-gcp-service
+
+[![Build Status](https://github.com/JamesWoolfenden/terraform-gcp-service/workflows/Verify%20and%20Bump/badge.svg?branch=master)](https://github.com/JamesWoolfenden/terraform-gcp-service)
+[![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/terraform-gcp-service.svg)](https://github.com/JamesWoolfenden/terraform-gcp-service/releases/latest)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![pre-commit](https://img.shields.io/badge/checkov-verified-brightgreen)](https://www.checkov.io/)
 
 Creates a GCP service user.
 
@@ -18,23 +23,27 @@ module "service" {
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| google | n/a |
 
 ## Inputs
 
-| Name    | Description                              |  Type  | Default | Required |
-| ------- | ---------------------------------------- | :----: | :-----: | :------: |
-| members | List of members who can use this role    |  list  |   n/a   |   yes    |
-| name    |                                          | string |   n/a   |   yes    |
-| project |                                          | string |   n/a   |   yes    |
-| service | Name and description of thd service user |  map   |   n/a   |   yes    |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:-----:|
+| members | List of members who can use this role | `list` | n/a | yes |
+| project | The GCP Project | `string` | n/a | yes |
+| service | Name and description of the service user | `map` | n/a | yes |
 
 ## Outputs
 
-| Name      | Description |
-| --------- | ----------- |
-| email     |             |
-| name      |             |
-| unique_id |             |
+| Name | Description |
+|------|-------------|
+| email | n/a |
+| name | n/a |
+| unique\_id | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
@@ -58,7 +67,7 @@ Please use the [issue tracker](https://github.com/jameswoolfenden/terraform-aws-
 
 ## Copyrights
 
-Copyright © 2019-2019 [Slalom, LLC](https://slalom.com)
+Copyright © 2019-2020 [Slalom, LLC](https://slalom.com)
 
 ## License
 

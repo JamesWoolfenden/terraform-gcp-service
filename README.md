@@ -21,32 +21,7 @@ module "service" {
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
-
-No requirements.
-
-## Providers
-
-| Name | Version |
-|------|---------|
-| google | n/a |
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| members | List of members who can use this role | `list` | n/a | yes |
-| project | The GCP Project | `string` | n/a | yes |
-| service | Name and description of the service user | `map` | n/a | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| email | n/a |
-| name | n/a |
-| unique\_id | n/a |
-
+Error: no lines in file
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Related Projects
@@ -69,7 +44,7 @@ Please use the [issue tracker](https://github.com/jameswoolfenden/terraform-aws-
 
 ## Copyrights
 
-Copyright © 2019-2019 [Slalom, LLC](https://slalom.com)
+Copyright © 2019-2020 James Woolfenden
 
 ## License
 

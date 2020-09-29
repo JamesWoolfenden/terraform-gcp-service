@@ -1,6 +1,9 @@
-[![Slalom][logo]](https://slalom.com)
+# terraform-gcp-service 
 
-# terraform-gcp-service [![Build Status](https://github.com/JamesWoolfenden/terraform-gcp-service/workflows/Verify%20and%20Bump/badge.svg?branch=master)](https://github.com/JamesWoolfenden/terraform-gcp-service) [![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/terraform-gcp-service.svg)](https://github.com/JamesWoolfenden/terraform-gcp-service/releases/latest)
+[![Build Status](https://github.com/JamesWoolfenden/terraform-gcp-service/workflows/Verify%20and%20Bump/badge.svg?branch=master)](https://github.com/JamesWoolfenden/terraform-gcp-service) 
+[![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/terraform-gcp-cloudfunction.svg)](https://github.com/JamesWoolfenden/terraform-gcp-cloudfunction/releases/latest)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![checkov](https://img.shields.io/badge/checkov-verified-brightgreen)](https://www.checkov.io/)
 
 Creates a GCP service user.
 
@@ -92,8 +95,8 @@ under the License.
 [logo]: https://gist.githubusercontent.com/JamesWoolfenden/5c457434351e9fe732ca22b78fdd7d5e/raw/15933294ae2b00f5dba6557d2be88f4b4da21201/slalom-logo.png
 [website]: https://slalom.com
 [github]: https://github.com/jameswoolfenden
-[linkedin]: https://www.linkedin.com/company/slalom-consulting/
-[twitter]: https://twitter.com/Slalom
+[linkedin]: https://www.linkedin.com/in/jameswoolfenden/
+[twitter]: https://twitter.com/JimWoolfenden
 [share_twitter]: https://twitter.com/intent/tweet/?text=terraform-aws-service&url=https://github.com/jameswoolfenden/terraform-aws-service
 [share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=terraform-aws-service&url=https://github.com/jameswoolfenden/terraform-aws-service
 [share_reddit]: https://reddit.com/submit/?url=https://github.com/jameswoolfenden/terraform-aws-service

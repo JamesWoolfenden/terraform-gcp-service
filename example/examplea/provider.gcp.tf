@@ -1,4 +1,4 @@
 provider google {
   project = "examplea"
-  version = "~> 2.17"
+  version = "~>3.10"
 }

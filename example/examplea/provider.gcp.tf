@@ -1,4 +1,4 @@
-provider google {
+provider "google" {
   project = "examplea"
-  version = "~>3.10"
+  version = "3.43.0"
 }

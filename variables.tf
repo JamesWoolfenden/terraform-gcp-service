@@ -6,10 +6,10 @@ variable "project" {
 
 variable "members" {
   description = "List of members who can use this role"
-  type        = list
+  type        = list(any)
 }
 
 variable "service" {
   description = "Name and description of the service user"
-  type        = map
+  type        = map(any)
 }

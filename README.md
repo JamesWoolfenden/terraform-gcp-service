@@ -35,9 +35,9 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| members | List of members who can use this role | `list` | n/a | yes |
+| members | List of members who can use this role | `list(any)` | n/a | yes |
 | project | The GCP Project | `string` | n/a | yes |
-| service | Name and description of the service user | `map` | n/a | yes |
+| service | Name and description of the service user | `map(any)` | n/a | yes |
 
 ## Outputs
 
@@ -69,7 +69,7 @@ Please use the [issue tracker](https://github.com/jameswoolfenden/terraform-aws-
 
 ## Copyrights
 
-Copyright © 2019-2020 James Woolfenden
+Copyright © 2019-2021 James Woolfenden
 
 ## License
 

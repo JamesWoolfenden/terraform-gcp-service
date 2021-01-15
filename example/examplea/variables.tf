@@ -7,9 +7,9 @@ variable "project" {
 }
 
 variable "members" {
-  type = list
+  type = list(any)
 }
 
 variable "service" {
-  type = map
+  type = map(any)
 }

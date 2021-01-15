@@ -13,7 +13,7 @@ Add **module.service.tf** to your code:-
 
 ```terraform
 module "service" {
-  source  = "../../"
+  source  = "0.0.1"
   members = var.members
   project = var.project
   service = var.service

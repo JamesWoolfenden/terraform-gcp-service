@@ -29,24 +29,35 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| google | n/a |
+| <a name="provider_google"></a> [google](#provider\_google) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [google_service_account.service](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
+| [google_service_account_iam_policy.iam](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account_iam_policy) | resource |
+| [google_iam_policy.policy](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/iam_policy) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| members | List of members who can use this role | `list(any)` | n/a | yes |
-| project | The GCP Project | `string` | n/a | yes |
-| service | Name and description of the service user | `map(any)` | n/a | yes |
+| <a name="input_members"></a> [members](#input\_members) | List of members who can use this role | `list(any)` | n/a | yes |
+| <a name="input_project"></a> [project](#input\_project) | The GCP Project | `string` | n/a | yes |
+| <a name="input_service"></a> [service](#input\_service) | Name and description of the service user | `map(any)` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| email | n/a |
-| name | n/a |
-| unique\_id | n/a |
-
+| <a name="output_email"></a> [email](#output\_email) | n/a |
+| <a name="output_name"></a> [name](#output\_name) | n/a |
+| <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Related Projects

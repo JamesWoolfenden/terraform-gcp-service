@@ -3,7 +3,7 @@ members = [
 ]
 
 name    = "terraform"
-project = "examplea"
+project = "pike"
 
 service = {
   id           = "terraform"

@@ -1,5 +1,5 @@
 members = [
-  "james.woolfenden@gmail.com",
+  "user:james.woolfenden@gmail.com",
 ]
 
 name    = "terraform"

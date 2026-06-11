@@ -1,0 +1,66 @@
+{
+  "findings": [
+    {
+      "confidence": "high",
+      "explanation": "The validation condition requires keys 'name' and 'description' in var.service, but google_service_account.service reads var.service[\"id\"] and var.service[\"display_name\"]. A caller passing { name = \"x\", description = \"y\" } satisfies the validation and passes terraform plan, then fails at apply with 'This map does not have an element with the key id'. No deterministic rule checks that variable validation conditions match the actual attribute keys consumed.",
+      "file": "variables.tf",
+      "id": "HOLDEN_AI_001",
+      "line": 27,
+      "principle": "repeatability",
+      "related_resources": [],
+      "remediation": "Change the validation condition to: contains(keys(var.service), \"id\") && contains(keys(var.service), \"display_name\")",
+      "resource": "google_service_account.service",
+      "severity": "HIGH",
+      "title": "var.service validation checks 'name'/'description' but resource uses 'id'/'display_name' \u2014 apply fails for any valid input"
+    },
+    {
+      "confidence": "high",
+      "explanation": "google_service_account_iam_policy is an authoritative resource: every apply completely replaces the service account's IAM policy with exactly what is declared. Any bindings granted outside this module (by other Terraform states, other modules, or manual grants) are silently removed. This makes the module unsafe to use alongside other IAM-granting resources on the same SA. HLD_GCP_078 checks google_service_account_iam_binding and google_service_account_iam_member for public access but does not cover google_service_account_iam_policy, leaving this resource without any holden scrutiny.",
+      "file": "google_service_account.iam.tf",
+      "id": "HOLDEN_AI_002",
+      "line": 2,
+      "principle": "identity-and-access",
+      "related_resources": [
+        "data.google_iam_policy.service"
+      ],
+      "remediation": "Replace google_service_account_iam_policy with google_service_account_iam_binding, which is additive per role rather than a full replacement. Also replace data.google_iam_policy with a direct role and members block on the binding resource.",
+      "resource": "google_service_account_iam_policy.iam",
+      "severity": "HIGH",
+      "title": "google_service_account_iam_policy replaces the entire SA IAM policy \u2014 silently wipes any bindings not managed by this module"
+    },
+    {
+      "confidence": "high",
+      "explanation": "The module hardcodes roles/iam.serviceAccountAdmin in the IAM policy binding. This forces all callers to grant admin rights over the service account (create/delete keys, manage IAM, enable/disable). Callers who only need serviceAccountUser (to impersonate the SA) or serviceAccountTokenCreator (to mint short-lived tokens) are forced to over-privilege instead. The module cannot be reused for any less-privileged grant.",
+      "file": "data.google_iam_policy.service.tf",
+      "id": "HOLDEN_AI_003",
+      "line": 5,
+      "principle": "identity-and-access",
+      "related_resources": [],
+      "remediation": "Replace the hardcoded role with var.role and add a variable: variable \"role\" { type = string; description = \"IAM role to grant to members on the service account\"; default = \"roles/iam.serviceAccountUser\" }",
+      "resource": "data.google_iam_policy.service",
+      "severity": "MEDIUM",
+      "title": "roles/iam.serviceAccountAdmin hardcoded \u2014 every caller is forced to grant admin access regardless of their intent"
+    },
+    {
+      "confidence": "high",
+      "explanation": "CKV2_GCP_3 checks that the service account has no admin privileges. The skip comment reads 'ADD REASON', a placeholder left from when the suppression was added. Without a real justification, reviewers cannot assess whether the suppression is intentional or an oversight. The fact that the module grants roles/iam.serviceAccountAdmin to members makes this suppression load-bearing \u2014 it should explain why admin access is acceptable here.",
+      "file": "google_service_account.service.tf",
+      "id": "HOLDEN_AI_004",
+      "line": 2,
+      "principle": "governance",
+      "related_resources": [],
+      "remediation": "Replace 'ADD REASON' with a real justification, e.g. '#checkov:skip=CKV2_GCP_3: module exists specifically to provision service accounts with controlled admin access; callers are responsible for restricting var.members to trusted principals'",
+      "resource": "google_service_account.service",
+      "severity": "LOW",
+      "title": "checkov:skip=CKV2_GCP_3 has placeholder reason 'ADD REASON' \u2014 suppression is undocumented"
+    }
+  ],
+  "suggested_policies": [
+    {
+      "dsl_extension_needed": "A 'references' chain that can follow policy_data from google_service_account_iam_policy into the data.google_iam_policy source, then inspect binding[*].members for allUsers/allAuthenticatedUsers. Alternatively, a 'linked_data_source' primitive analogous to linked_resource but for data sources.",
+      "rationale": "HLD_GCP_078 checks google_service_account_iam_binding and google_service_account_iam_member for allUsers/allAuthenticatedUsers public access, but there is no equivalent check for google_service_account_iam_policy. Because google_service_account_iam_policy embeds its members inside a data.google_iam_policy block rather than as a direct attribute, a simple not_null/one_of check on the members attribute cannot detect allUsers. This requires a DSL extension to either (a) follow references from policy_data into the data source binding.members, or (b) flag google_service_account_iam_policy as requiring manual review because its members are opaque to attribute-level checks.",
+      "requires_dsl_extension": true,
+      "yaml": "id: HLD_PROPOSED_008\nname: google_service_account_iam_policy must not grant public access\nprinciple: identity-and-access\nseverity: CRITICAL\nrationale: |\n  google_service_account_iam_policy embeds IAM members inside a\n  data.google_iam_policy binding. HLD_GCP_078 covers\n  google_service_account_iam_binding and google_service_account_iam_member\n  but not the policy variant, leaving a gap where allUsers or\n  allAuthenticatedUsers could be granted serviceAccountAdmin without any\n  holden finding.\nremediation: |\n  Replace google_service_account_iam_policy with\n  google_service_account_iam_binding (additive, per-role) and ensure no\n  binding grants access to allUsers or allAuthenticatedUsers.\nrequires_dsl_extension: true\n# DSL extension needed: follow policy_data reference into data.google_iam_policy\n# and inspect binding[*].members for forbidden values.\nresources:\n  google_service_account_iam_policy: {}\n"
+    }
+  ]
+}

@@ -1,8 +1,6 @@
 members = [
   "user:james.woolfenden@gmail.com",
 ]
-
-name    = "terraform"
 project = "pike"
 
 service = {

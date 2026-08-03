@@ -1,0 +1,29 @@
+{
+  "findings": [
+    {
+      "confidence": "high",
+      "explanation": "google_service_account_iam_binding sets the authoritative member list for one specific role on the service account; it replaces the full membership of that role on every apply, preserving only *other* roles' bindings. It is not the truly additive behavior (google_service_account_iam_member is). Commit 5fe5865 replaced google_service_account_iam_policy (fully authoritative for the whole SA policy) with this resource and described it in the commit message as \"additive per role\" \u2014 that description is incorrect for the resource that was chosen; the improvement made was real (blast radius shrank from 'whole policy' to 'one role'), but the resource is still authoritative for that role, not additive. var.role defaults to roles/iam.serviceAccountUser, which is also the role most commonly granted to a separate WIF/CI identity for impersonation. Because this module is designed to be instantiated by external callers (per README's `module \"service\" { source = ... }` usage), if any other Terraform configuration also grants the same role to this exact service account via its own google_service_account_iam_binding (or the equivalent policy resource) \u2014 e.g. a WIF principal added outside this module for CI impersonation \u2014 whichever config applies last wins and silently drops the other's members. No error, no warning, just quietly reduced or revoked access. This is invisible to a single-resource rule since it depends on how the module is composed with IaC the engine never sees.",
+      "file": "google_service_account.iam.tf",
+      "first_seen": "2026-08-03",
+      "fixable": false,
+      "id": "HOLDEN_AI_001",
+      "last_seen": "2026-08-03",
+      "line": 1,
+      "principle": "identity-and-access",
+      "related_resources": [
+        "google_service_account.service",
+        "variables.tf#var.role",
+        "variables.tf#var.members"
+      ],
+      "remediation": "If the role granted via var.role is ever expected to have members added from more than one place (a human list here, plus a CI/WIF principal added elsewhere against the same SA and role), switch to one google_service_account_iam_member resource per entry in var.members instead of a single google_service_account_iam_binding \u2014 that resource type is genuinely additive and won't fight with other IaC managing the same role. If this module is meant to be the sole, exclusive owner of every role it grants on the service accounts it creates, keep google_service_account_iam_binding but say so explicitly in the module README so future callers don't add a second binding for the same role on the same SA.",
+      "resource": "google_service_account_iam_binding.iam",
+      "severity": "MEDIUM",
+      "status": "fixed",
+      "title": "google_service_account_iam_binding is authoritative per-role, not additive per-member \u2014 a second grantor of the same role will silently clobber this module's members"
+    }
+  ],
+  "scan_date": "2026-08-03T10:15:00Z",
+  "scan_path": ".",
+  "suggested_policies": [],
+  "suggested_suppressions": []
+}

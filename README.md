@@ -46,10 +46,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
-| <a name="input_members"></a> [members](#input\_members) | List of members who can use this role | `list(any)` | n/a | yes |
+| <a name="input_members"></a> [members](#input\_members) | List of members who can use this role | `list(string)` | n/a | yes |
 | <a name="input_project"></a> [project](#input\_project) | The GCP Project | `string` | n/a | yes |
 | <a name="input_role"></a> [role](#input\_role) | IAM role to grant to members on the service account | `string` | `"roles/iam.serviceAccountUser"` | no |
-| <a name="input_service"></a> [service](#input\_service) | Name and description of the service user | `map(any)` | n/a | yes |
+| <a name="input_service"></a> [service](#input\_service) | Name and description of the service user | <pre>object({<br/>    id           = string<br/>    display_name = string<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 

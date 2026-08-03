@@ -1,0 +1,73 @@
+{
+  "findings": [
+    {
+      "confidence": "high",
+      "explanation": "Terraform's built-in trim(string, cutset) function requires two arguments. `trim(var.role)` fails with \"Not enough function arguments\" during terraform validate/plan, unconditionally, for anyone consuming this module (confirmed with tofu validate). This looks like a typo for trimspace(), which takes a single string argument and does what the validation intends (reject blank/whitespace-only role values).",
+      "file": "variables.tf",
+      "first_seen": "2026-08-03",
+      "fix": "condition     = length(trimspace(var.role)) > 0",
+      "fixable": true,
+      "id": "HOLDEN_BP_001",
+      "last_seen": "2026-08-03",
+      "line": 28,
+      "principle": "maintainability",
+      "remediation": "Replace trim(var.role) with trimspace(var.role) in the validation condition.",
+      "resource": "variable.role",
+      "severity": "MEDIUM",
+      "status": "fixed",
+      "title": "variable \"role\" validation calls trim() with a single argument, breaking terraform validate for every consumer"
+    },
+    {
+      "confidence": "medium",
+      "explanation": "members holds IAM member identifiers (e.g. \"user:x@example.com\"), which are always strings. list(any) defers type-checking to apply time and loses IDE/tooling autocomplete and static type errors that list(string) would provide for free.",
+      "file": "variables.tf",
+      "first_seen": "2026-08-03",
+      "fix": "type = list(string)",
+      "fixable": true,
+      "id": "HOLDEN_BP_002",
+      "last_seen": "2026-08-03",
+      "line": 14,
+      "principle": "maintainability",
+      "remediation": "Change type to list(string). This narrows what callers can pass, so treat it as a minor-version change for a published module.",
+      "resource": "variable.members",
+      "severity": "INFO",
+      "status": "fixed",
+      "title": "variable \"members\" typed as list(any) instead of list(string)"
+    },
+    {
+      "confidence": "medium",
+      "explanation": "service is validated via contains(keys(var.service), \"id\") && contains(keys(var.service), \"display_name\") to simulate required fields. An object({ id = string, display_name = string }) type would enforce both required keys and their types structurally, making the custom validation redundant and giving callers a self-documenting schema instead of a bare map.",
+      "file": "variables.tf",
+      "first_seen": "2026-08-03",
+      "fixable": false,
+      "id": "HOLDEN_BP_003",
+      "last_seen": "2026-08-03",
+      "line": 35,
+      "principle": "maintainability",
+      "remediation": "Change type to object({ id = string, display_name = string }) and drop the now-redundant contains(keys(...)) validation (or keep it only if optional/extra keys should still be tolerated, in which case object(...) with optional() attributes is a closer fit).",
+      "resource": "variable.service",
+      "severity": "INFO",
+      "status": "fixed",
+      "title": "variable \"service\" typed as map(any) with a hand-rolled key-presence check instead of a typed object"
+    },
+    {
+      "confidence": "high",
+      "explanation": "terraform.tf requires google = \"7.30.0\", but the committed .terraform.lock.hcl locks google to 3.59.0. A fresh `terraform init` / `tofu init` (no -upgrade) fails immediately with \"Failed to resolve provider packages\" (confirmed). Anyone cloning the repo and following the README's example cannot initialize it without already knowing to pass -upgrade.",
+      "file": "example/examplea/.terraform.lock.hcl",
+      "first_seen": "2026-08-03",
+      "fixable": false,
+      "id": "HOLDEN_BP_004",
+      "last_seen": "2026-08-03",
+      "line": 1,
+      "principle": "repeatability",
+      "remediation": "Regenerate the lock file with `tofu init -upgrade` (or `terraform init -upgrade`) and commit it so the constraint and lock agree. Note: running this under OpenTofu rewrites the lock file's registry host from registry.terraform.io to registry.opentofu.org \u2014 confirm that's acceptable for consumers who use plain Terraform before committing, or regenerate with the terraform CLI instead to keep the hashicorp registry host.",
+      "resource": "example/examplea",
+      "severity": "MEDIUM",
+      "status": "fixed",
+      "title": "example/examplea lock file pins google provider to a version that violates its own required_providers constraint"
+    }
+  ],
+  "scan_date": "2026-08-03T09:00:00Z",
+  "scan_path": ".",
+  "suggested_policies": []
+}
